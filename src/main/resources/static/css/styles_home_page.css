@@ -1,0 +1,68 @@
+/* Общие стили */
+/* картинка https://www.iissalpimontale.edu.it/wp-content/uploads/2022/11/giovani_1-1024x730.jpg*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Чтобы изображение фона не было видно за пределами контейнера */
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    width: 400px;
+}
+
+/* Стили для заголовка */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Стили для кнопок */
+.buttons {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: 5px;
+    margin-right: 10px;
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:active {
+    background-color: #d4a004;
+}

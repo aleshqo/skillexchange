@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+<h1>User Profile</h1>
+<p><strong>Full Name:</strong> [[${user.name}]]</p>
+<p><strong>Age:</strong> [[${user.age}]]</p>
+<p><strong>Gender:</strong> [[${user.gender}]]</p>
+<p><strong>Skill:</strong> [[${user.skill.name}]]</p>
+<!-- Дополнительные данные профиля -->
+
+<!-- Ссылка на редактирование профиля -->
+<a th:href="@{/profile/{userId}/edit(userId=${user.id})}">Edit Profile</a>
+</body>
+</html>

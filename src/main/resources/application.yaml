@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://john.db.elephantsql.com:5432/iosaxwna
+    username: iosaxwna
+    password: Bj_AdnX-8t8j8Ee0Iw7z731037e1rgib
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 1
+      minimum-idle: 5
+      idle-timeout: 60000
+      pool-name: SpringHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
+  web:
+    resources:
+      add-mappings: true
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
