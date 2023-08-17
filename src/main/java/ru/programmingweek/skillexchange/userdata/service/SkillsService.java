@@ -2,10 +2,10 @@ package ru.programmingweek.skillexchange.userdata.service;
 
 import org.springframework.stereotype.Service;
 import ru.programmingweek.skillexchange.userdata.model.Skills;
-import ru.programmingweek.skillexchange.userdata.model.UserEntity;
 import ru.programmingweek.skillexchange.userdata.repository.SkillsRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,6 +19,12 @@ public class SkillsService {
 
     public SkillsService(SkillsRepository skillRepository) {
         this.skillRepository = skillRepository;
+        //TODO: по идее должны быть в БД
+        skillsList.addAll(List.of(
+                new Skills(0L, "Не указан"),
+                new Skills(1L, "ENGLISH"),
+                new Skills(2L, "FRENCH")
+        ));
     }
 
     public Skills saveSkill(Skills skill) {
@@ -37,11 +43,10 @@ public class SkillsService {
         return skill;
     }
 
-    public Skills getSkillById(Long id) {
+    public Optional<Skills> getSkillById(Long id) {
         return skillsList.stream()
                 .filter(s -> id.equals(s.getId()))
-                .findFirst()
-                .orElse(new Skills().setId(1L).setName("English"));
+                .findFirst();
     }
 
     public List<Skills> getAllSkills() {

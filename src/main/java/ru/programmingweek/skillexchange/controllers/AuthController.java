@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.programmingweek.skillexchange.userdata.model.UserEntity;
 import ru.programmingweek.skillexchange.userdata.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
@@ -24,23 +25,23 @@ public class AuthController {
 
     @GetMapping("/")
     public String showHomePage() {
-        return "home_page";
+        return "homePageForm";
     }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new UserEntity());
-        return "register_form";
+        model.addAttribute("loggedInUser", new UserEntity());
+        return "registerForm";
     }
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
-        model.addAttribute("user", new UserEntity());
-        return "login_form";
+        model.addAttribute("loggedInUser", new UserEntity());
+        return "loginForm";
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@ModelAttribute("user") UserEntity user) {
+    public ModelAndView registerUser(@ModelAttribute("user") UserEntity user, HttpSession session) {
         if (userService.getUserByLogin(user.getLogin()).isPresent()) {
             ModelAndView errorModel = new ModelAndView("register_form");
             errorModel.addObject("errorMessage", "Логин уже зарегистрирован");
@@ -49,13 +50,15 @@ public class AuthController {
 
         userService.saveUser(user);
 
-        ModelAndView successModel = new ModelAndView("register_form");
-        successModel.addObject("message", "Пользователь успешно зарегистрирован");
-        return successModel;
+        // Сохранение аутентифицированного пользователя в сессии
+        session.setAttribute("loggedInUser", user);
+
+        // Перенаправление на страницу профиля
+        return new ModelAndView("redirect:/profile/" + user.getId());
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@ModelAttribute("user") UserEntity user) {
+    public ModelAndView loginUser(@ModelAttribute("user") UserEntity user, HttpSession session) {
         Optional<UserEntity> existingUser = userService.getUserByLoginAndPassword(user.getLogin(), user.getPassword());
         if (existingUser.isEmpty()) {
             ModelAndView errorModel = new ModelAndView("login_form");
@@ -63,9 +66,11 @@ public class AuthController {
             return errorModel;
         }
 
-        ModelAndView successModel = new ModelAndView("login_form");
-        successModel.addObject("message", "Вход выполнен успешно");
-        return successModel;
+        // Сохранение аутентифицированного пользователя в сессии
+        session.setAttribute("loggedInUser", existingUser.get());
+
+        // Перенаправление на страницу профиля
+        return new ModelAndView("redirect:/profile/" + existingUser.get().getId());
     }
 }
 

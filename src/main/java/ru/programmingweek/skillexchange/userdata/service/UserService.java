@@ -2,6 +2,7 @@ package ru.programmingweek.skillexchange.userdata.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.programmingweek.skillexchange.userdata.model.Skills;
 import ru.programmingweek.skillexchange.userdata.model.UserEntity;
 import ru.programmingweek.skillexchange.userdata.repository.UserDataRepository;
 
@@ -32,7 +33,10 @@ public class UserService {
                 .ifPresentOrElse(
                         existingUser -> users.set(users.indexOf(existingUser), user),
                         () -> {
+                            Skills emptySkill = new Skills(0L,"Не указан");
                             user.setId(ID.incrementAndGet());
+                            user.setSkill(emptySkill);
+                            user.setInterest(emptySkill);
                             users.add(user);
                         }
                 );

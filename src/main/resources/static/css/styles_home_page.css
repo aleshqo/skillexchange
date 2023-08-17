@@ -1,4 +1,3 @@
-/* Общие стили */
 /* картинка https://www.iissalpimontale.edu.it/wp-content/uploads/2022/11/giovani_1-1024x730.jpg*/
 body {
     margin: 0;
@@ -9,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* Чтобы изображение фона не было видно за пределами контейнера */
+    overflow: hidden;
 }
 
 .container {
@@ -40,7 +39,7 @@ h1 {
 
 /* Стили для кнопок */
 .buttons {
-    text-align: left;
+    text-align: center;
     margin-top: 10px;
 }
 
@@ -56,7 +55,7 @@ h1 {
     display: block;
     margin-top: 5px;
     margin-right: 10px;
-    text-decoration: none; /* Убираем подчеркивание */
+    text-decoration: none;
 }
 
 .button:hover {

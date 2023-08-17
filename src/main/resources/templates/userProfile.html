@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/profileAndEdit.css">
     <title>User Profile</title>
 </head>
 <body>
-<h1>User Profile</h1>
-<p><strong>Full Name:</strong> [[${user.name}]]</p>
-<p><strong>Age:</strong> [[${user.age}]]</p>
-<p><strong>Gender:</strong> [[${user.gender}]]</p>
-<p><strong>Skill:</strong> [[${user.skill.name}]]</p>
-<!-- Дополнительные данные профиля -->
+<div class="profile-container">
+    <div class="user-info">
+        <h1 th:text="${user.name}"></h1>
+        <p>Возраст: <span th:text="${user.age}"></span></p>
+        <p>Пол: <span th:text="${user.gender}"></span></p>
 
-<!-- Ссылка на редактирование профиля -->
-<a th:href="@{/profile/{userId}/edit(userId=${user.id})}">Edit Profile</a>
+        <h3>Мастерство:</h3>
+        <p th:if="${user.skill != null}" th:text="${user.skill.name}"></p>
+        <p th:unless="${user.skill != null}">Не указано</p>
+
+        <h3>Интересы:</h3>
+        <p th:if="${user.interest != null}" th:text="${user.interest.name}"></p>
+        <p th:unless="${user.interest != null}">Не указано</p>
+    </div>
+    <a class="edit-profile-link" th:href="@{/profile/{userId}/edit(userId=${user.id})}">Редактировать профиль</a>
+
+    <a class="logout-link" th:href="@{/profile/{userId}/logout(userId=${user.id})}">Выйти</a>
+
+</div>
 </body>
 </html>
