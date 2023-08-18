@@ -12,15 +12,42 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
-public class UserService {
+public class UserDataService {
     //TODO: Временное решение тк проблема с коннектами в БД
     private static final List<UserEntity> users = new CopyOnWriteArrayList<>();
     private static final AtomicLong ID = new AtomicLong(0);
     private final UserDataRepository userRepository;
 
     @Autowired
-    public UserService(UserDataRepository userRepository) {
+    public UserDataService(UserDataRepository userRepository) {
         this.userRepository = userRepository;
+        users.add(new UserEntity()
+                .setId(777L)
+                .setName("Алексей")
+                .setAge(30)
+                .setSkill(new Skills(1L, "ENGLISH"))
+                .setInterest(new Skills(2L, "FRENCH"))
+                .setGender("Мужской")
+                .setLogin("aleshqo")
+                .setPassword("123"));
+        users.add(new UserEntity()
+                .setId(666L)
+                .setName("Димка")
+                .setAge(25)
+                .setSkill(new Skills(2L, "FRENCH") )
+                .setInterest(new Skills(1L, "ENGLISH"))
+                .setGender("Мужской")
+                .setLogin("dimon")
+                .setPassword("123"));
+        users.add(new UserEntity()
+                .setId(666L)
+                .setName("Михаил")
+                .setAge(25)
+                .setSkill(new Skills(2L, "FRENCH") )
+                .setInterest(new Skills(1L, "ENGLISH"))
+                .setGender("Мужской")
+                .setLogin("mishOK")
+                .setPassword("123"));
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -66,7 +93,8 @@ public class UserService {
     }
 
     public List<UserEntity> getAllUsers() {
-        return (List<UserEntity>) userRepository.findAll();
+//        return (List<UserEntity>) userRepository.findAll();
+        return users;
     }
 
     public void deleteUser(UserEntity user) {

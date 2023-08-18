@@ -23,14 +23,12 @@
         <select id="skill" name="skillId">
             <option th:each="skill : ${skillsList}" th:value="${skill.id}" th:text="${skill.name}"
                     th:selected="${user.skill != null and user.skill.id == skill.id}"></option>
-            <option value="">Не указано</option>
         </select><br>
 
         <label for="interest">Интересы:</label>
         <select id="interest" name="interestId">
             <option th:each="skill : ${skillsList}" th:value="${skill.id}" th:text="${skill.name}"
                     th:selected="${user.interest != null and user.interest.id == skill.id}"></option>
-            <option value="">Не указано</option>
         </select><br>
 
         <button type="submit">Сохранить</button>

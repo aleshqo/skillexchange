@@ -1,20 +1,15 @@
 package ru.programmingweek.skillexchange;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.programmingweek.skillexchange.userdata.model.Skills;
-import ru.programmingweek.skillexchange.userdata.model.UserEntity;
-import ru.programmingweek.skillexchange.userdata.service.UserService;
-
-import static org.junit.jupiter.api.Assertions.*;
+import ru.programmingweek.skillexchange.userdata.service.UserDataService;
 
 @SpringBootTest
 class DbTests {
 
     @Autowired
-    private UserService userService;
+    private UserDataService userDataService;
 
     @Test
     void crudTest() {

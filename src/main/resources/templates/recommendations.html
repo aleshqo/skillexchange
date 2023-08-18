@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/recommendations.css">
+    <title>Recommendations</title>
+</head>
+<body>
+<div class="recommendations-container">
+    <h1>Рекомендации для пользователя: <span th:text="${user.name}"></span></h1>
+    <ul>
+        <th:block th:each="recommendedUser : ${matchingPair}">
+        <li>
+                <h3>Пользователь: <span th:text="${recommendedUser.name}"></span></h3>
+                <p>Возраст: <span th:text="${recommendedUser.age}"></span></p>
+                <p>Пол: <span th:text="${recommendedUser.gender}"></span></p>
+                <p>Навыки:
+                    <span th:each="skill : ${recommendedUser.skill}">
+                        <span th:text="${skill.name}"></span>
+                    </span>
+                </p>
+                <p>Интересы:
+                    <span th:each="interest : ${recommendedUser.interest}">
+                        <span th:text="${interest.name}"></span>
+                    </span>
+                </p>
+                <a class="view-profile-link" th:href="@{/profile/{userId}(userId=${recommendedUser.id})}">Просмотреть профиль</a>
+            </li>
+        </th:block>
+    </ul>
+
+    <a class="back-to-profile" th:href="@{/profile/{userId}(userId=${user.id})}">Вернуться к профилю</a>
+</div>
+</body>
+</html>

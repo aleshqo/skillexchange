@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/profileAndEdit.css">
     <title>User Profile</title>
+    <style>
+        /* Добавьте свои стили здесь */
+    </style>
 </head>
 <body>
 <div class="profile-container">
@@ -20,10 +23,40 @@
         <p th:if="${user.interest != null}" th:text="${user.interest.name}"></p>
         <p th:unless="${user.interest != null}">Не указано</p>
     </div>
-    <a class="edit-profile-link" th:href="@{/profile/{userId}/edit(userId=${user.id})}">Редактировать профиль</a>
 
-    <a class="logout-link" th:href="@{/profile/{userId}/logout(userId=${user.id})}">Выйти</a>
+    <a class="edit-profile-link"
+       th:href="@{/profile/{userId}/edit(userId=${user.id})}"
+       th:if="${loggedInUser != null and loggedInUser.id == user.id}">
+        Редактировать профиль
+    </a>
+
+    <a class="recommendations-link"
+       th:href="@{/profile/{userId}/recommendations(userId=${user.id})}"
+       th:if="${loggedInUser != null and loggedInUser.id == user.id}">
+        Рекомендации
+    </a>
+
+    <a class="logout-link"
+       th:href="@{/profile/{userId}/logout(userId=${user.id})}"
+       th:if="${loggedInUser != null and loggedInUser.id == user.id}">
+        Выйти
+    </a>
+
+    <a class="back-to-profile"
+       th:if="${loggedInUser != null and loggedInUser.id != user.id}"
+       th:href="@{/profile/{userId}(userId=${loggedInUser.id})}">
+        Вернуться к профилю
+    </a>
+
+<!--    <a class="send-chatMessage-link"-->
+<!--       th:if="${loggedInUser != null and loggedInUser.id != user.id}"-->
+<!--       th:href="@{/chat/{senderId}/{receiverId}(senderId=${loggedInUser.id}, receiverId=${user.id})}"-->
+<!--       th:data-sender-id="${loggedInUser.id}" th:data-receiver-id="${user.id}">-->
+<!--        Отправить сообщение-->
+<!--    </a>-->
 
 </div>
+
+<script src="/js/chat.js"></script>
 </body>
 </html>

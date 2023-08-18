@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
@@ -37,7 +37,8 @@ body {
     border-radius: 5px;
 }
 
-.edit-profile-container button {
+.edit-profile-container button,
+.recommendations-link {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -45,23 +46,50 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-}
-
-.edit-profile-container button:hover {
-    background-color: #0056b3;
-}
-
-.edit-profile-link {
-    display: block;
+    display: inline-block;
     margin-top: 10px;
-    color: #007bff;
+    width: 32%;
     text-decoration: none;
     font-weight: bold;
 }
 .logout-link {
-    display: block;
+    background-color: #FC0000D0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
     margin-top: 10px;
-    color: #d9534f;
+    width: 32%;
     text-decoration: none;
     font-weight: bold;
 }
+
+.edit-profile-container button:hover{
+    background-color: rgba(0, 163, 215, 0.78);
+}
+.recommendations-link:hover{
+    background-color: #0056b3;
+}
+.logout-link:hover {
+    background-color: #e02525;
+}
+
+.edit-profile-link, .recommendations-link, .logout-link {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.edit-profile-link {
+    color: #007bff;
+}
+
+.recommendations-link, .logout-link {
+    color: #ffffff;
+}
+
+
