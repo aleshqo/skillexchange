@@ -2,13 +2,12 @@ package ru.programmingweek.skillexchange.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ru.programmingweek.skillexchange.userdata.model.Skills;
 import ru.programmingweek.skillexchange.userdata.model.UserEntity;
 import ru.programmingweek.skillexchange.userdata.service.UserDataService;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserPairingService {
@@ -21,19 +20,10 @@ public class UserPairingService {
     }
 
     public List<UserEntity> findMatchingPair(UserEntity user) {
-        List<UserEntity> matchingPairs = new ArrayList<>();
-
-        List<UserEntity> allUsers = userService.getAllUsers();
-
-        for (UserEntity otherUser : allUsers) {
-            if (!otherUser.equals(user)) {
-                if (hasCommonSkillOrInterest(user, otherUser)) {
-                    matchingPairs.add(otherUser);
-                }
-            }
-        }
-
-        return matchingPairs;
+        return userService.getAllUsers().stream()
+                .filter(otherUser -> !otherUser.equals(user))
+                .filter(otherUser -> hasCommonSkillOrInterest(user, otherUser))
+                .collect(Collectors.toList());
     }
 
     private boolean hasCommonSkillOrInterest(UserEntity user1, UserEntity user2) {

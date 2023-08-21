@@ -88,8 +88,38 @@ body {
     color: #007bff;
 }
 
-.recommendations-link, .logout-link {
+.recommendations-link,
+.logout-link {
     color: #ffffff;
 }
 
+.back-to-profile {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+    width: 36%;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.send-chatMessage-link {
+    background-color: #0dad03c9;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+    width: 38%;
+    text-decoration: none;
+    font-weight: bold;
+}
 

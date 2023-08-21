@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/profileAndEdit.css">
+    <link rel="stylesheet" type="text/css" href="/css/profileStyle.css">
     <title>User Profile</title>
     <style>
         /* Добавьте свои стили здесь */
@@ -48,12 +48,12 @@
         Вернуться к профилю
     </a>
 
-<!--    <a class="send-chatMessage-link"-->
-<!--       th:if="${loggedInUser != null and loggedInUser.id != user.id}"-->
-<!--       th:href="@{/chat/{senderId}/{receiverId}(senderId=${loggedInUser.id}, receiverId=${user.id})}"-->
-<!--       th:data-sender-id="${loggedInUser.id}" th:data-receiver-id="${user.id}">-->
-<!--        Отправить сообщение-->
-<!--    </a>-->
+    <a class="send-chatMessage-link"
+       th:if="${loggedInUser != null and loggedInUser.id != user.id}"
+       th:href="@{/chat/{senderId}/{receiverId}(senderId=${loggedInUser.id}, receiverId=${user.id})}"
+       th:data-sender-id="${loggedInUser.id}" th:data-receiver-id="${user.id}">
+        Отправить сообщение
+    </a>
 
 </div>
 

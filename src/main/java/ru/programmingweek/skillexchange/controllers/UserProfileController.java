@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.programmingweek.skillexchange.controllers.ControllerUtils.*;
+
+//TODO: Переделать на spring-security
 @Controller
 @RequestMapping("/profile")
 public class UserProfileController {
@@ -31,10 +34,10 @@ public class UserProfileController {
     @GetMapping("/{userId}")
     public String showUserProfile(@PathVariable Long userId, HttpSession session, Model model) {
         UserEntity user = userDataService.getUserById(userId);
-        model.addAttribute("user", user);
+        model.addAttribute(BROWSE_USER_ATTR_NAME, user);
 
-        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
-        model.addAttribute("loggedInUser", loggedInUser);
+        UserEntity loggedInUser = getLoggedInUserFromSession(session);
+        model.addAttribute(LOGGED_IN_USER_ATTR_NAME, loggedInUser);
 
         return "userProfile";
     }
@@ -45,7 +48,7 @@ public class UserProfileController {
 
         List<Skills> skillsList = skillsService.getAllSkills();
 
-        model.addAttribute("user", user);
+        model.addAttribute(BROWSE_USER_ATTR_NAME, user);
         model.addAttribute("skillsList", skillsList);
         return "editProfile";
     }
@@ -72,7 +75,7 @@ public class UserProfileController {
         // Обновление других данных профиля
 
         userDataService.saveUser(user); // Сохранение изменений
-        return "redirect:/profile/" + userId;
+        return REDIRECT_TO_PROFILE + userId;
     }
 
     @GetMapping("/{userId}/recommendations")
@@ -82,29 +85,20 @@ public class UserProfileController {
 
             List<UserEntity> matchingPairs = userPairingService.findMatchingPair(user);
 
-            model.addAttribute("user", user);
+            model.addAttribute(BROWSE_USER_ATTR_NAME, user);
             model.addAttribute("matchingPair", matchingPairs);
 
             return "recommendations";
         }
-        return "redirect:/login";
+        return REDIRECT_TO_LOGIN;
     }
 
+    @SuppressWarnings("unused")
     @GetMapping("/{userId}/logout")
     public String logout(@PathVariable Long userId, HttpSession session) {
         // Удаление данных аутентификации из сессии
-        session.removeAttribute("loggedInUser");
+        session.removeAttribute(LOGGED_IN_USER_ATTR_NAME);
         return "redirect:/";
-    }
-
-    private boolean isCurrentUser(Long userId, HttpSession session) {
-        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
-        return loggedInUser != null && loggedInUser.getId().equals(userId);
-    }
-
-    private boolean isLoggedIn(HttpSession session) {
-        UserEntity user = (UserEntity) session.getAttribute("loggedInUser");
-        return user != null;
     }
 }
 

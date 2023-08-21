@@ -34,7 +34,7 @@ public class UserDataService {
                 .setId(666L)
                 .setName("Димка")
                 .setAge(25)
-                .setSkill(new Skills(2L, "FRENCH") )
+                .setSkill(new Skills(2L, "FRENCH"))
                 .setInterest(new Skills(1L, "ENGLISH"))
                 .setGender("Мужской")
                 .setLogin("dimon")
@@ -43,7 +43,7 @@ public class UserDataService {
                 .setId(666L)
                 .setName("Михаил")
                 .setAge(25)
-                .setSkill(new Skills(2L, "FRENCH") )
+                .setSkill(new Skills(2L, "FRENCH"))
                 .setInterest(new Skills(1L, "ENGLISH"))
                 .setGender("Мужской")
                 .setLogin("mishOK")
@@ -60,7 +60,7 @@ public class UserDataService {
                 .ifPresentOrElse(
                         existingUser -> users.set(users.indexOf(existingUser), user),
                         () -> {
-                            Skills emptySkill = new Skills(0L,"Не указан");
+                            Skills emptySkill = new Skills(0L, "Не указан");
                             user.setId(ID.incrementAndGet());
                             user.setSkill(emptySkill);
                             user.setInterest(emptySkill);
